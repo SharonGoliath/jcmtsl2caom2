@@ -2,7 +2,7 @@
 # ******************  CANADIAN ASTRONOMY DATA CENTRE  *******************
 # *************  CENTRE CANADIEN DE DONNÉES ASTRONOMIQUES  **************
 #
-#  (c) 2023.                            (c) 2023.
+#  (c) 2025.                            (c) 2025.
 #  Government of Canada                 Gouvernement du Canada
 #  National Research Council            Conseil national de recherches
 #  Ottawa, Canada, K1A 0R6              Ottawa, Canada, K1A 0R6
@@ -66,49 +66,38 @@
 # ***********************************************************************
 #
 
-import os
-
 from mock import patch
 
 from caom2pipe import manage_composable as mc
 from jcmtsl2caom2 import composable
 
 
-def test_run_by_state():
-    pass
-
-
-@patch('cadcutils.net.ws.WsCapabilities.get_access_url')
-@patch('caom2pipe.execute_composable.OrganizeExecutes.do_one')
-def test_run(run_mock, access_mock, test_config, tmp_path):
-    run_mock.return_value = 0
-    access_mock.return_value = 'https://localhost'
+@patch('caom2pipe.client_composable.ClientCollection')
+@patch('caom2pipe.execute_composable.OrganizeExecutesRunnerMeta.do_one')
+def test_run(do_one_mock, clients_mock, test_config, tmp_path, change_test_dir):
+    do_one_mock.return_value = (0, None)
     test_f_id = 'test_file_id'
     test_f_name = f'{test_f_id}.fits'
-    orig_cwd = os.getcwd()
+    test_config.change_working_directory(tmp_path.as_posix())
+    test_config.proxy_file_name = 'test_proxy.fqn'
+    test_config.logging_level = 'DEBUG'
+    test_config.write_to_file(test_config)
+
+    with open(test_config.proxy_fqn, 'w') as f:
+        f.write('test content')
+    with open(test_config.work_fqn, 'w') as f:
+        f.write(test_f_name)
+
     try:
-        os.chdir(tmp_path.as_posix())
-        test_config.change_working_directory(tmp_path.as_posix())
-        test_config.proxy_file_name = 'test_proxy.fqn'
-        test_config.write_to_file(test_config)
+        # execution
+        test_result = composable._run()
+    except Exception as e:
+        assert False, e
 
-        with open(test_config.proxy_fqn, 'w') as f:
-            f.write('test content')
-        with open(test_config.work_fqn, 'w') as f:
-            f.write(test_f_name)
-
-        try:
-            # execution
-            test_result = composable._run()
-        except Exception as e:
-            assert False, e
-
-        assert test_result == 0, 'wrong return value'
-        assert run_mock.called, 'should have been called'
-        args, kwargs = run_mock.call_args
-        test_storage = args[0]
-        assert isinstance(test_storage, mc.StorageName), type(test_storage)
-        assert test_storage.file_name == test_f_name, 'wrong file name'
-        assert test_storage.source_names[0] == test_f_name, 'wrong fname on disk'
-    finally:
-        os.chdir(orig_cwd)
+    assert test_result == 0, 'wrong return value'
+    assert do_one_mock.called, 'should have been called'
+    args, _ = do_one_mock.call_args
+    test_storage = args[0]
+    assert isinstance(test_storage, mc.StorageName), type(test_storage)
+    assert test_storage.file_name == test_f_name, 'wrong file name'
+    assert test_storage.source_names[0] == test_f_name, 'wrong fname on disk'

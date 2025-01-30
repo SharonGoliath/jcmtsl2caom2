@@ -2,7 +2,7 @@
 # ******************  CANADIAN ASTRONOMY DATA CENTRE  *******************
 # *************  CENTRE CANADIEN DE DONNÉES ASTRONOMIQUES  **************
 #
-#  (c) 2024.                            (c) 2024.
+#  (c) 2025.                            (c) 2025.
 #  Government of Canada                 Gouvernement du Canada
 #  National Research Council            Conseil national de recherches
 #  Ottawa, Canada, K1A 0R6              Ottawa, Canada, K1A 0R6
@@ -87,7 +87,7 @@ def test_storage_name(test_config):
             f'/tmp/{test_f_name}',
         ],
     ):
-        test_subject = JCMTSLName(entry)
+        test_subject = JCMTSLName([entry])
         assert test_subject.file_id == test_f_name.replace('.fits', '').replace('.header', ''), f'wrong file id {index}'
         assert test_subject.file_uri == test_uri, f'wrong uri {index}'
         assert test_subject.obs_id == test_obs_id, f'wrong obs id {index}'

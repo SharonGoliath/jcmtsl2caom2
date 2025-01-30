@@ -2,7 +2,7 @@
 # ******************  CANADIAN ASTRONOMY DATA CENTRE  *******************
 # *************  CENTRE CANADIEN DE DONNÉES ASTRONOMIQUES  **************
 #
-#  (c) 2024.                            (c) 2024.
+#  (c) 2025.                            (c) 2025.
 #  Government of Canada                 Gouvernement du Canada
 #  National Research Council            Conseil national de recherches
 #  Ottawa, Canada, K1A 0R6              Ottawa, Canada, K1A 0R6
@@ -67,21 +67,28 @@
 #
 
 
+from caom2 import ProductType
 from caom2pipe import caom_composable as cc
-from jcmtsl2caom2 import main_app
+from caom2utils.parsers import BlueprintParser, FitsParser
+from jcmtsl2caom2.main_app import mapping_factory
 
 
 __all__ = ['JCMTSLFile2caom2Visitor']
 
 
-class JCMTSLFile2caom2Visitor(cc.Fits2caom2Visitor):
-    def __init__(self, observation, **kwargs):
-        super().__init__(observation, **kwargs)
+class JCMTSLFile2caom2Visitor(cc.Fits2caom2VisitorRunnerMeta):
 
-    def _get_mapping(self, headers, _):
-        return main_app.JCMTSLMapping(
-            self._storage_name, headers, self._clients, self._observable, self._observation, self._config
-        )
+    def _get_mapping(self, dest_uri):
+        return mapping_factory(self._clients, self._config, self._reporter, self._observation, self._storage_name)
+
+    def _get_parser(self, blueprint, uri):
+        headers = self._storage_name.metadata.get(uri)
+        if self._storage_name.product_type() in [ProductType.AUXILIARY, ProductType.NOISE, ProductType.WEIGHT]:
+            parser = BlueprintParser(blueprint, uri)
+        else:
+            parser = FitsParser(headers, blueprint, uri)
+        self._logger.debug(f'Created {parser.__class__.__name__} parser for {uri}.')
+        return parser
 
 
 def visit(observation, **kwargs):

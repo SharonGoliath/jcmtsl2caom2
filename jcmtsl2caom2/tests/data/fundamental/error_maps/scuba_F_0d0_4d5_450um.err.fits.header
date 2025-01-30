@@ -1,0 +1,44 @@
+# HDU 0 in fundamental/error_maps/scuba_F_0d0_4d5_450um.err.fits:
+SIMPLE  =                    T  /                                               
+BITPIX  =                  -32  /                                               
+NAXIS   =                    2  /                                               
+NAXIS1  =                 1440  /                                               
+NAXIS2  =                 1440  /                                               
+EXTEND  =                    T  /                                               
+BSCALE  =    1.00000000000E+00  /                                               
+BZERO   =    0.00000000000E+00  /                                               
+CDELT1  =   -8.33333333883E-04  /                                               
+CRPIX1  =    7.20500000000E+02  /                                               
+CRVAL1  =    2.62063000957E+02  /                                               
+CTYPE1  = 'RA---TAN'  /                                                         
+CDELT2  =    8.33333333883E-04  /                                               
+CRPIX2  =    7.20500000000E+02  /                                               
+CRVAL2  =   -2.65000001043E+01  /                                               
+CTYPE2  = 'DEC--TAN'  /                                                         
+DATE-OBS= '2000-01-01T12:00:00.0'  /                                            
+CELLSCAL= 'CONSTANT'  /                                                         
+EPOCH   =    2.00000000000E+03  /                                               
+HISTORY FITS (Flexible Image Transport System) format is defined in 'Astronomy  
+HISTORY and Astrophysics', volume 376, page 359; bibcode: 2001A&A...376..359H   
+HISTORY RADECSYS= 'FK5     '           /                                        
+HISTORY '        '           / Created with corrected version of mapfits (May   
+HISTORY FITS: Miriad Fits: version 1.1 04-Oct-01                                
+HISTORY FITS: Executed on: 07MAY29:12:23:47.0                                   
+HISTORY FITS: Command line inputs follow:                                       
+HISTORY FITS:   in=scuba_F_0d0_4d5_450um.err.fits                               
+HISTORY FITS:   op=xyin                                                         
+HISTORY FITS:   out=temp                                                        
+HISTORY MATHS: Miriad Maths: version 1.0 17-Oct-00                              
+HISTORY MATHS: Executed on: 07MAY29:12:23:48.0                                  
+HISTORY MATHS: Command line inputs follow:                                      
+HISTORY MATHS:   exp=<temp>*2.9                                                 
+HISTORY MATHS:   out=temp2                                                      
+HISTORY MATHS: Bounding region is Blc=(1,1),Trc=(1440,1440)                     
+HISTORY FITS: Miriad fits: Fits: version 1.1 04-Oct-01                          
+HISTORY FITS: Executed on: 07MAY29:12:23:48.0                                   
+HISTORY FITS: Command line inputs follow:                                       
+HISTORY FITS:    in=temp2                                                       
+HISTORY FITS:    op=xyout                                                       
+HISTORY FITS:    out=scuba_F_0d0_4d5_450um.err.fits                             
+HISTORY FITS: NOTE: Use options=varwt if loading into Miriad                    
+ORIGIN  = 'Miriad Fits: version 1.1 04-Oct-01'  /                               

@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<caom2:Observation xmlns:caom2="http://www.opencadc.org/caom2/xml/v2.4" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="caom2:DerivedObservation" caom2:id="d071312b-aac4-49d4-804b-467ad1da82e1">
+  <caom2:collection>JCMTSL</caom2:collection>
+  <caom2:observationID>scuba_F_210d0_-36d4_850um</caom2:observationID>
+  <caom2:algorithm>
+    <caom2:name>mapfits</caom2:name>
+  </caom2:algorithm>
+  <caom2:planes>
+    <caom2:plane caom2:id="6fe8fd5b-01db-4f4d-9415-0c783a2b747c">
+      <caom2:productID>scuba_F_210d0_-36d4_850um.cov</caom2:productID>
+      <caom2:dataProductType>image</caom2:dataProductType>
+      <caom2:calibrationLevel>4</caom2:calibrationLevel>
+      <caom2:artifacts>
+        <caom2:artifact caom2:id="c2dfd82d-6554-4c72-9b8a-422473f17b4b">
+          <caom2:uri>cadc:JCMTSL/scuba_F_210d0_-36d4_850um.cov.fits</caom2:uri>
+          <caom2:productType>weight</caom2:productType>
+          <caom2:releaseType>data</caom2:releaseType>
+          <caom2:contentType>application/fits</caom2:contentType>
+          <caom2:contentLength>1936</caom2:contentLength>
+          <caom2:contentChecksum>md5:3f0b559f3373229f5eb2e8cafaae46c8</caom2:contentChecksum>
+          <caom2:parts/>
+        </caom2:artifact>
+      </caom2:artifacts>
+    </caom2:plane>
+  </caom2:planes>
+</caom2:Observation>

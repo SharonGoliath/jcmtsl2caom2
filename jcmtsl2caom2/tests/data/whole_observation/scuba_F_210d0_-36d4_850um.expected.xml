@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<caom2:Observation xmlns:caom2="http://www.opencadc.org/caom2/xml/v2.4" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="caom2:DerivedObservation" caom2:id="303f86c5-abf0-41cb-a148-34a4f03c7fab" caom2:metaProducer="jcmtsl2caom2/0.1.0">
+  <caom2:collection>JCMTSL</caom2:collection>
+  <caom2:observationID>scuba_F_210d0_-36d4_850um</caom2:observationID>
+  <caom2:algorithm>
+    <caom2:name>mapfits</caom2:name>
+  </caom2:algorithm>
+  <caom2:planes>
+    <caom2:plane caom2:id="bf164662-70a7-4c07-88cd-71adefd8c7e2" caom2:metaProducer="jcmtsl2caom2/0.1.0">
+      <caom2:productID>scuba_F_210d0_-36d4_850um.cov</caom2:productID>
+      <caom2:dataProductType>image</caom2:dataProductType>
+      <caom2:calibrationLevel>4</caom2:calibrationLevel>
+      <caom2:artifacts>
+        <caom2:artifact caom2:id="6e16515d-c8ad-46ff-873d-99079f5f8a2f" caom2:metaProducer="jcmtsl2caom2/0.1.0">
+          <caom2:uri>cadc:JCMTSL/scuba_F_210d0_-36d4_850um.cov.fits</caom2:uri>
+          <caom2:productType>weight</caom2:productType>
+          <caom2:releaseType>data</caom2:releaseType>
+          <caom2:contentType>application/fits</caom2:contentType>
+          <caom2:contentLength>1936</caom2:contentLength>
+          <caom2:contentChecksum>md5:3f0b559f3373229f5eb2e8cafaae46c8</caom2:contentChecksum>
+          <caom2:parts/>
+        </caom2:artifact>
+      </caom2:artifacts>
+    </caom2:plane>
+    <caom2:plane caom2:id="f56e8eba-1f09-4c2b-8a37-dda86c074f79" caom2:metaProducer="jcmtsl2caom2/0.1.0">
+      <caom2:productID>scuba_F_210d0_-36d4_850um.err</caom2:productID>
+      <caom2:dataProductType>image</caom2:dataProductType>
+      <caom2:calibrationLevel>4</caom2:calibrationLevel>
+      <caom2:artifacts>
+        <caom2:artifact caom2:id="7ce46a6f-70e3-4da8-ba2e-bbe00eb1604e" caom2:metaProducer="jcmtsl2caom2/0.1.0">
+          <caom2:uri>cadc:JCMTSL/scuba_F_210d0_-36d4_850um.err.fits</caom2:uri>
+          <caom2:productType>noise</caom2:productType>
+          <caom2:releaseType>data</caom2:releaseType>
+          <caom2:contentType>application/fits</caom2:contentType>
+          <caom2:contentLength>3553</caom2:contentLength>
+          <caom2:contentChecksum>md5:202d8a9fca41c264ea5b5fb833f3f261</caom2:contentChecksum>
+          <caom2:parts/>
+        </caom2:artifact>
+      </caom2:artifacts>
+    </caom2:plane>
+  </caom2:planes>
+</caom2:Observation>

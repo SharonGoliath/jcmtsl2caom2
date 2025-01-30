@@ -1,0 +1,8 @@
+# HDU 0 in fundamental/object_maps/scuba_F_311d0_62d1_850um.obj.fits:
+SIMPLE  =                    T /image conforms to FITS standard                 
+BITPIX  =                   16 /bits per data value                             
+NAXIS   =                    2 /number of axes                                  
+NAXIS1  =                  720 /                                                
+NAXIS2  =                  720 /                                                
+EXTEND  =                    T /file may contain extensions                     
+COMMENT = 'see file.orig for clfinds output' /                                  

@@ -1,0 +1,24 @@
+# HDU 0 in extended/coverage_map/scuba_E_0d0_4d5_850um.cov.fits:
+SIMPLE  =                    T / file does conform to FITS standard             
+BITPIX  =                  -32 / number of bits per data pixel                  
+NAXIS   =                    2 / number of data axes                            
+NAXIS1  =                  720 / length of data axis 1                          
+NAXIS2  =                  720 / length of data axis 2                          
+COMMENT   FITS (Flexible Image Transport System) format is defined in 'Astronomy
+COMMENT   and Astrophysics', volume 376, page 359; bibcode: 2001A&A...376..359H 
+RADECSYS= 'FK5     '           /                                                
+EQUINOX =                 2000 /                                                
+EPOCH   =                 2000 /                                                
+CTYPE1  = 'RA---TAN'           /                                                
+CRPIX1  =        3.6050000E+02 /                                                
+CRVAL1  =    2.62063000000E+02 /                                                
+CDELT1  =   -1.66666666666E-03 /                                                
+CROTA1  =                    0 /                                                
+CTYPE2  = 'DEC--TAN'           /                                                
+CRPIX2  =        3.6050000E+02 /                                                
+CRVAL2  =   -2.65000000000E+01 /                                                
+CDELT2  =    1.66666666666E-03 /                                                
+CROTA2  =                    0 /                                                
+HISTORY = '        '           / Created with corrected version of mapfits (May 
+TELESCOP= '        '           / Matrix Inversion                               
+DATE    = '2006-05-26T18:24:21' / file creation date (YYYY-MM-DDThh:mm:ss UT)   

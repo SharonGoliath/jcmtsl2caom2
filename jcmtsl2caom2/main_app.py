@@ -131,7 +131,7 @@ class JCMTSLBase(cc.TelescopeMapping2):
         bp.set('Observation.telescope.geoLocationY', -2491090.15)
         bp.set('Observation.telescope.geoLocationZ', 2149569.763)
 
-        bp.set('Plane.calibrationLevel', 3)
+        bp.set('Plane.calibrationLevel', 4)
 
         bp.set('Artifact.productType', self._storage_name.product_type())
         bp.set('Artifact.releaseType', 'data')
@@ -142,7 +142,19 @@ class JCMTSLBase(cc.TelescopeMapping2):
         """Called to fill multiple CAOM model elements and/or attributes (an n:n relationship between TDM attributes
         and CAOM attributes).
         """
-        return super().update()
+        self._observation = super().update()
+        public_plane = None
+        for plane in self._observation.planes.values():
+            if plane.meta_release:
+                public_plane = plane
+                break
+        if public_plane:
+            for proprietary_plane in self._observation.planes.values():
+                if not proprietary_plane.meta_release:
+                    proprietary_plane.data_release = plane.data_release
+                    proprietary_plane.meta_release = plane.meta_release
+            self._observation.meta_release = plane.meta_release
+        return self._observation
 
     def _get_target_name(self, ext):
         bits = self._storage_name.file_name.split('_')

@@ -66,8 +66,6 @@
 # ***********************************************************************
 #
 
-from mock import patch
-
 from jcmtsl2caom2 import file2caom2_augmentation, main_app
 from caom2.diff import get_differences
 from caom2utils.data_util import get_local_file_headers, get_local_file_info
@@ -85,17 +83,15 @@ def pytest_generate_tests(metafunc):
 def test_main_app_many_times(test_name, test_config, test_data_dir, tmp_path, change_test_dir):
     test_config.change_working_directory(tmp_path.as_posix())
 
-    import logging
-    # logging.getLogger().setLevel(logging.DEBUG)
     test_obs_id = os.path.basename(test_name).replace('.expected.xml', '')
-    test_file_names = glob.glob(f'{test_data_dir}/*/*/{test_obs_id}*.fits.header')
+    test_file_names = glob.glob(f'{test_data_dir}/*/*/scuba_{test_obs_id}*.fits.header')
 
     test_reporter = mc.ExecutionReporter2(test_config)
     actual_fqn = test_name.replace('expected', 'actual')
-    logging.error(actual_fqn)
     if os.path.exists(actual_fqn):
         os.unlink(actual_fqn)
     observation = None
+
     for test_file_name in test_file_names:
         storage_name = main_app.JCMTSLName([test_file_name.replace('.header', '')])
         storage_name.file_info[storage_name.file_uri] = get_local_file_info(test_file_name)
@@ -108,7 +104,7 @@ def test_main_app_many_times(test_name, test_config, test_data_dir, tmp_path, ch
         }
         observation = file2caom2_augmentation.visit(observation, **kwargs)
     if observation is None:
-        assert False, f'Did not create observation for {test_name}'
+        assert False, f'Did not create observation for {test_name} number of inputs {len(test_file_names)}'
     else:
         if os.path.exists(test_name):
             expected = mc.read_obs_from_file(test_name)

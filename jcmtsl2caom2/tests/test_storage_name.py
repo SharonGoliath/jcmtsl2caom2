@@ -66,7 +66,6 @@
 # ***********************************************************************
 #
 
-from caom2pipe import manage_composable as mc
 from jcmtsl2caom2 import JCMTSLName
 
 
@@ -75,8 +74,8 @@ def test_is_valid():
 
 
 def test_storage_name(test_config):
-    test_obs_id = 'TEST_OBS_ID'
-    test_f_name = f'{test_obs_id}.fits'
+    test_obs_id = 'OBS'
+    test_f_name = f'TEST_OBS_ID.fits'
     test_uri = f'{test_config.scheme}:{test_config.collection}/{test_f_name}'
     for index, entry in enumerate(
         [
@@ -89,9 +88,9 @@ def test_storage_name(test_config):
     ):
         test_subject = JCMTSLName([entry])
         assert test_subject.file_id == test_f_name.replace('.fits', '').replace('.header', ''), f'wrong file id {index}'
-        assert test_subject.file_uri == test_uri, f'wrong uri {index}'
-        assert test_subject.obs_id == test_obs_id, f'wrong obs id {index}'
-        assert test_subject.product_id == test_obs_id, f'wrong product id {index}'
-        assert test_subject.source_names == [entry], f'wrong source names {index}'
-        assert test_subject.destination_uris == [test_uri], f'wrong uris {index} {test_subject}'
+        assert test_subject.file_uri == test_uri, f'wrong uri {entry}'
+        assert test_subject.obs_id == test_obs_id, f'wrong obs id {entry}'
+        assert test_subject.product_id == '850um', f'wrong product id {entry}'
+        assert test_subject.source_names == [entry], f'wrong source names {entry}'
+        assert test_subject.destination_uris == [test_uri], f'wrong uris {entry} {test_subject}'
 

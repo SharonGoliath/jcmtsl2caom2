@@ -66,8 +66,6 @@
 # ***********************************************************************
 #
 
-from mock import patch
-
 from jcmtsl2caom2 import file2caom2_augmentation, main_app
 from caom2.diff import get_differences
 from caom2utils.data_util import get_local_file_headers, get_local_file_info
@@ -85,8 +83,6 @@ def pytest_generate_tests(metafunc):
 def test_main_app(test_name, test_config, tmp_path, change_test_dir):
     test_config.change_working_directory(tmp_path.as_posix())
 
-    import logging
-    # logging.getLogger().setLevel(logging.DEBUG)
     storage_name = main_app.JCMTSLName([test_name.replace('.header', '')])
     storage_name.file_info[storage_name.file_uri] = get_local_file_info(test_name)
     storage_name.file_info[storage_name.file_uri].file_type = 'application/fits'
@@ -97,7 +93,7 @@ def test_main_app(test_name, test_config, tmp_path, change_test_dir):
         'config': test_config,
         'reporter': test_reporter,
     }
-    expected_fqn = test_name.replace('.fits.header', '.expected.xml')
+    expected_fqn = f'{os.path.dirname(test_name)}/{storage_name.obs_id}.expected.xml'
     in_fqn = expected_fqn.replace('.expected', '.in')
     actual_fqn = expected_fqn.replace('expected', 'actual')
     if os.path.exists(actual_fqn):

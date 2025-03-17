@@ -88,7 +88,7 @@ class JCMTSLFile2caom2Visitor(cc.Fits2caom2VisitorRunnerMeta):
                 result = JCMTSL850um(self._storage_name, self._clients, self._reporter, self._observation, self._config)
             else:
                 result = JCMTSL450um(self._storage_name, self._clients, self._reporter, self._observation, self._config)
-        self._logger.error(f'Created {result.__class__.__name__} for {self._storage_name.file_uri}')
+        self._logger.debug(f'Created {result.__class__.__name__} for {self._storage_name.file_uri}')
         return [result]
 
     def _get_parser(self, blueprint, uri):

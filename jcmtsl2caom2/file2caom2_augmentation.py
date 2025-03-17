@@ -70,7 +70,7 @@
 from caom2 import ProductType
 from caom2pipe import caom_composable as cc
 from caom2utils.parsers import BlueprintParser, FitsParser
-from jcmtsl2caom2.main_app import mapping_factory
+from jcmtsl2caom2.main_app import JCMTSLBase, JCMTSL450um, JCMTSL850um
 
 
 __all__ = ['JCMTSLFile2caom2Visitor']
@@ -78,12 +78,22 @@ __all__ = ['JCMTSLFile2caom2Visitor']
 
 class JCMTSLFile2caom2Visitor(cc.Fits2caom2VisitorRunnerMeta):
 
-    def _get_mapping(self, dest_uri):
-        return mapping_factory(self._clients, self._config, self._reporter, self._observation, self._storage_name)
+    def _get_mappings(self, dest_uri):
+        result = None
+        if 'um.obj.' in self._storage_name.file_name:
+            result = JCMTSLBase(self._storage_name, self._clients, self._reporter, self._observation, self._config)
+        else:
+            # JJK - ‘chunk’ WCS information for the .err and .cov files
+            if '850um' in self._storage_name.file_name:
+                result = JCMTSL850um(self._storage_name, self._clients, self._reporter, self._observation, self._config)
+            else:
+                result = JCMTSL450um(self._storage_name, self._clients, self._reporter, self._observation, self._config)
+        self._logger.error(f'Created {result.__class__.__name__} for {self._storage_name.file_uri}')
+        return [result]
 
     def _get_parser(self, blueprint, uri):
         headers = self._storage_name.metadata.get(uri)
-        if self._storage_name.product_type() in [ProductType.AUXILIARY, ProductType.NOISE, ProductType.WEIGHT]:
+        if 'um.obj.' in self._storage_name.file_name:
             parser = BlueprintParser(blueprint, uri)
         else:
             parser = FitsParser(headers, blueprint, uri)

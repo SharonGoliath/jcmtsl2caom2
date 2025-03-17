@@ -1,0 +1,51 @@
+# HDU 0 in fundamental/emission_maps/scuba_F_0d0_4d5_850um.emi.fits:
+SIMPLE  =                    T  /                                               
+BITPIX  =                  -32  /                                               
+NAXIS   =                    2  /                                               
+NAXIS1  =                  720  /                                               
+NAXIS2  =                  720  /                                               
+EXTEND  =                    T  /                                               
+BSCALE  =    1.00000000000E+00  /                                               
+BZERO   =    0.00000000000E+00  /                                               
+CDELT1  =   -1.66666667770E-03  /                                               
+CRPIX1  =    3.60500000000E+02  /                                               
+CRVAL1  =    2.62063000957E+02  /                                               
+CTYPE1  = 'RA---TAN'  /                                                         
+CDELT2  =    1.66666667770E-03  /                                               
+CRPIX2  =    3.60500000000E+02  /                                               
+CRVAL2  =   -2.65000001043E+01  /                                               
+CTYPE2  = 'DEC--TAN'  /                                                         
+DATE-OBS= '2000-01-01T12:00:00.0'  /                                            
+CELLSCAL= 'CONSTANT'  /                                                         
+EPOCH   =    2.00000000000E+03  /                                               
+HISTORY IRAF-TLM= '10:17:24 (31/05/2006)' / Time of last modification           
+HISTORY FITS (Flexible Image Transport System) format is defined in 'Astronomy  
+HISTORY 'regions where < 15 obs taken removed' /ume 376, page 359; bibcode: 20  
+HISTORY RADECSYS= 'FK5     '           /                                        
+HISTORY '        '           / Created with corrected version of mapfits (May   
+HISTORY Image reduction: clipped to remove regions of very high noise/few observ
+HISTORY Flattening: removed large scale structure through subtraction of        
+HISTORY larger scale smoothed image (gaussian smoothing with sigma=120arcsec).  
+HISTORY To prevent effect of bowls around bright sources, the subtracted        
+HISTORY image had the brightest +/- peaks                                       
+HISTORY (+/- 0.120828Jy/bm) set to this before smoothing.                       
+HISTORY FITS: Miriad Fits: version 1.1 04-Oct-01                                
+HISTORY FITS: Executed on: 07MAY29:11:26:56.0                                   
+HISTORY FITS: Command line inputs follow:                                       
+HISTORY FITS:   in=scuba_F_0d0_4d5_850um.emi.fits                               
+HISTORY FITS:   op=xyin                                                         
+HISTORY FITS:   out=temp                                                        
+HISTORY MATHS: Miriad Maths: version 1.0 17-Oct-00                              
+HISTORY MATHS: Executed on: 07MAY29:11:26:56.0                                  
+HISTORY MATHS: Command line inputs follow:                                      
+HISTORY MATHS:   exp=<temp>*2.1                                                 
+HISTORY MATHS:   out=temp2                                                      
+HISTORY MATHS: Bounding region is Blc=(1,1),Trc=(720,720)                       
+HISTORY FITS: Miriad fits: Fits: version 1.1 04-Oct-01                          
+HISTORY FITS: Executed on: 07MAY29:11:26:56.0                                   
+HISTORY FITS: Command line inputs follow:                                       
+HISTORY FITS:    in=temp2                                                       
+HISTORY FITS:    op=xyout                                                       
+HISTORY FITS:    out=scuba_F_0d0_4d5_850um.emi.fits                             
+HISTORY FITS: NOTE: Use options=varwt if loading into Miriad                    
+ORIGIN  = 'Miriad Fits: version 1.1 04-Oct-01'  /                               

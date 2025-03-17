@@ -1,0 +1,128 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<caom2:Observation xmlns:caom2="http://www.opencadc.org/caom2/xml/v2.4" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="caom2:DerivedObservation" caom2:id="1904c903-2ac2-4b92-942f-1c6a583e07e3">
+  <caom2:collection>SCUBA-LC</caom2:collection>
+  <caom2:observationID>E_85d1_-1d8</caom2:observationID>
+  <caom2:metaRelease>2000-01-01T12:00:00.000</caom2:metaRelease>
+  <caom2:algorithm>
+    <caom2:name>mapfits</caom2:name>
+  </caom2:algorithm>
+  <caom2:intent>science</caom2:intent>
+  <caom2:proposal>
+    <caom2:id>JCMTSL</caom2:id>
+    <caom2:pi>Di Francesco, J.</caom2:pi>
+    <caom2:project>SCUBA Legacy Catalogs</caom2:project>
+    <caom2:title>Submillimetre Continuum Objects Detected by SCUBA</caom2:title>
+  </caom2:proposal>
+  <caom2:target>
+    <caom2:name>85d1_-1d8</caom2:name>
+    <caom2:type>field</caom2:type>
+  </caom2:target>
+  <caom2:telescope>
+    <caom2:name>JCMT</caom2:name>
+    <caom2:geoLocationX>-5461075.78</caom2:geoLocationX>
+    <caom2:geoLocationY>-2491090.15</caom2:geoLocationY>
+    <caom2:geoLocationZ>2149569.763</caom2:geoLocationZ>
+  </caom2:telescope>
+  <caom2:instrument>
+    <caom2:name>SCUBA</caom2:name>
+  </caom2:instrument>
+  <caom2:planes>
+    <caom2:plane caom2:id="be671972-1460-4584-94aa-4115f940bd14" caom2:metaProducer="jcmtsl2caom2/0.1.0">
+      <caom2:productID>850um</caom2:productID>
+      <caom2:metaRelease>2000-01-01T12:00:00.000</caom2:metaRelease>
+      <caom2:dataRelease>2000-01-01T12:00:00.000</caom2:dataRelease>
+      <caom2:dataProductType>image</caom2:dataProductType>
+      <caom2:calibrationLevel>4</caom2:calibrationLevel>
+      <caom2:provenance>
+        <caom2:name>SCUBA Legacy Catalogs</caom2:name>
+        <caom2:version>1.1 04-Oct-01</caom2:version>
+        <caom2:producer>Miriad Fits</caom2:producer>
+        <caom2:reference>http://doi.org/10.1086/523645</caom2:reference>
+        <caom2:lastExecuted>2007-05-29T13:22:38.000</caom2:lastExecuted>
+	<caom2:keywords>
+          <caom2:keyword>extended</caom2:keyword>
+          <caom2:keyword>matrix inversion</caom2:keyword>
+        </caom2:keywords>
+      </caom2:provenance>
+      <caom2:artifacts>
+        <caom2:artifact caom2:id="3e88528d-4c1a-4dae-91ea-f96c70a42a55" caom2:metaProducer="jcmtsl2caom2/0.1.0">
+          <caom2:uri>cadc:SCUBA-LC/scuba_E_85d1_-1d8_850um.err.fits</caom2:uri>
+          <caom2:productType>noise</caom2:productType>
+          <caom2:releaseType>data</caom2:releaseType>
+          <caom2:contentType>application/fits</caom2:contentType>
+          <caom2:contentLength>3548</caom2:contentLength>
+          <caom2:contentChecksum>md5:2082560ea33a07b8a0b6ac7e7f2f6695</caom2:contentChecksum>
+          <caom2:parts>
+            <caom2:part caom2:id="bed36e71-a287-4bc0-911d-a7873ab60926">
+              <caom2:name>0</caom2:name>
+              <caom2:chunks>
+                <caom2:chunk caom2:id="84f5ef2e-4a7a-4ded-8f8e-3e647db46a17" caom2:metaProducer="jcmtsl2caom2/0.1.0">
+                  <caom2:naxis>2</caom2:naxis>
+                  <caom2:positionAxis1>1</caom2:positionAxis1>
+                  <caom2:positionAxis2>2</caom2:positionAxis2>
+                  <caom2:position>
+                    <caom2:axis>
+                      <caom2:axis1>
+                        <caom2:ctype>RA---TAN</caom2:ctype>
+                        <caom2:cunit>deg</caom2:cunit>
+                      </caom2:axis1>
+                      <caom2:axis2>
+                        <caom2:ctype>DEC--TAN</caom2:ctype>
+                        <caom2:cunit>deg</caom2:cunit>
+                      </caom2:axis2>
+                      <caom2:function>
+                        <caom2:dimension>
+                          <caom2:naxis1>720</caom2:naxis1>
+                          <caom2:naxis2>720</caom2:naxis2>
+                        </caom2:dimension>
+                        <caom2:refCoord>
+                          <caom2:coord1>
+                            <caom2:pix>360.5</caom2:pix>
+                            <caom2:val>315.169000307</caom2:val>
+                          </caom2:coord1>
+                          <caom2:coord2>
+                            <caom2:pix>360.5</caom2:pix>
+                            <caom2:val>43.5000000596</caom2:val>
+                          </caom2:coord2>
+                        </caom2:refCoord>
+                        <caom2:cd11>-0.0016666666777</caom2:cd11>
+                        <caom2:cd12>0.0</caom2:cd12>
+                        <caom2:cd21>0.0</caom2:cd21>
+                        <caom2:cd22>0.0016666666777</caom2:cd22>
+                      </caom2:function>
+                    </caom2:axis>
+                    <caom2:coordsys>FK5</caom2:coordsys>
+                    <caom2:equinox>2000.0</caom2:equinox>
+                    <caom2:resolution>6.0</caom2:resolution>
+                  </caom2:position>
+                  <caom2:energy>
+                    <caom2:axis>
+                      <caom2:axis>
+                        <caom2:ctype>WAVE</caom2:ctype>
+                        <caom2:cunit>um</caom2:cunit>
+                      </caom2:axis>
+                      <caom2:range>
+                        <caom2:start>
+                          <caom2:pix>0.5</caom2:pix>
+                          <caom2:val>840.5</caom2:val>
+                        </caom2:start>
+                        <caom2:end>
+                          <caom2:pix>1.5</caom2:pix>
+                          <caom2:val>859.5</caom2:val>
+                        </caom2:end>
+                      </caom2:range>
+                    </caom2:axis>
+                    <caom2:specsys>BARYCENT</caom2:specsys>
+                    <caom2:ssysobs>TOPOCENT</caom2:ssysobs>
+                    <caom2:ssyssrc>TOPOCENT</caom2:ssyssrc>
+                    <caom2:bandpassName>850um</caom2:bandpassName>
+                  </caom2:energy>
+                </caom2:chunk>
+              </caom2:chunks>
+            </caom2:part>
+          </caom2:parts>
+        </caom2:artifact>
+      </caom2:artifacts>
+    </caom2:plane>
+  </caom2:planes>
+</caom2:Observation>

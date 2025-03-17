@@ -70,7 +70,6 @@
 This module implements the ObsBlueprint mapping, as well as the workflow entry point that executes the workflow.
 """
 
-import logging
 from os.path import basename
 from caom2 import ProductType
 from caom2pipe.astro_composable import get_datetime_mjd
@@ -79,8 +78,7 @@ from caom2pipe.manage_composable import make_datetime, StorageName
 
 
 __all__ = [
-    'mapping_factory',
-    'JCMTSLName',
+    'JCMTSLName', 'JCMTSL850um', 'JCMTSL450um', 'JCMTSLBase'
 ]
 
 
@@ -98,18 +96,32 @@ class JCMTSLName(StorageName):
     def is_valid(self):
         return True
 
+    def catalogue_type(self):
+        if self._obs_id.startswith('F_'):
+            result = 'fundamental'
+        elif self._obs_id.startswith('E_'):
+            result = 'extended'
+        return result
+
     def product_type(self):
+        # JJK The .err are ProductType ‘WEIGHT’ and .cov are ‘AUXILIARY’ and .obj are ‘INFO’
         result = ProductType.SCIENCE
         if 'um.err.' in self._file_name:
             result = ProductType.NOISE
         elif 'um.cov.' in self._file_name:
-            result = ProductType.WEIGHT
+            result = ProductType.AUXILIARY
         elif 'um.obj.' in self._file_name:
             result = ProductType.AUXILIARY
         return result
 
+    def set_product_id(self, **kwargs):
+        self._product_id = '850um'
+        if '450um' in self._file_name:
+            self._product_id = '450um'
+
     def set_obs_id(self, **kwargs):
-        self._obs_id = self._file_name.split('.')[0]
+        bits = self._file_name.split('_')
+        self._obs_id = '_'.join(ii for ii in bits[1:-1])
 
 
 class JCMTSLBase(cc.TelescopeMapping2):
@@ -124,6 +136,12 @@ class JCMTSLBase(cc.TelescopeMapping2):
         bp.set('Observation.algorithm.name', 'mapfits')
         bp.set('Observation.instrument.name', 'SCUBA')
         bp.set('Observation.intent', 'science')
+        bp.add_attribute('Observation.metaRelease', 'DATE-OBS')
+        bp.set_default('Observation.metaRelease', '2000-01-01T00:00:00.000')
+        bp.set('Observation.proposal.id', 'JCMTSL')
+        bp.set('Observation.proposal.project', 'SCUBA Legacy Catalogs')
+        bp.set('Observation.proposal.pi', 'Di Francesco, J.')
+        bp.set('Observation.proposal.title', 'Submillimetre Continuum Objects Detected by SCUBA')
         bp.set('Observation.target.name', '_get_target_name()')
         bp.set('Observation.target.type', 'field')
         bp.set('Observation.telescope.name', 'JCMT')
@@ -131,6 +149,11 @@ class JCMTSLBase(cc.TelescopeMapping2):
         bp.set('Observation.telescope.geoLocationY', -2491090.15)
         bp.set('Observation.telescope.geoLocationZ', 2149569.763)
 
+        bp.add_attribute('Plane.dataRelease', 'DATE-OBS')
+        bp.set_default('Plane.dataRelease', '2000-01-01T00:00:00.000')
+        bp.add_attribute('Plane.metaRelease', 'DATE-OBS')
+        bp.set_default('Plane.metaRelease', '2000-01-01T00:00:00.000')
+        bp.set('Plane.dataProductType', 'image')
         bp.set('Plane.calibrationLevel', 4)
 
         bp.set('Artifact.productType', self._storage_name.product_type())
@@ -175,27 +198,20 @@ class JCMTSLSpatialSpectral(JCMTSLBase):
         self._logger.debug('Begin accumulate_bp.')
         super().accumulate_blueprint(bp)
 
-        bp.add_attribute('Plane.dataRelease', 'DATE-OBS')
-        bp.add_attribute('Plane.metaRelease', 'DATE-OBS')
-        bp.set('Plane.dataProductType', 'image')
-        bp.set('Plane.provenance.name', 'JCMTSL')
+        bp.set('Plane.provenance.name', 'SCUBA Legacy Catalogs')
+        bp.set('Plane.provenance.keywords', '_get_provenance_keywords()')
         bp.set('Plane.provenance.lastExecuted', '_get_provenance_last_executed()')
         bp.set('Plane.provenance.producer', '_get_provenance_producer()')
-        bp.set('Plane.provenance.reference', 'https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/community/scubalegacy/')
+        bp.set('Plane.provenance.reference', 'http://doi.org/10.1086/523645')
         bp.set('Plane.provenance.version', '_get_provenance_version()')
 
         bp.configure_position_axes((1, 2))
         # J2000 equatorial coordinates
         bp.set('Chunk.position.axis.axis1.cunit', 'deg')
         bp.set('Chunk.position.axis.axis2.cunit', 'deg')
-        # bp.set('Chunk.position.axis.function.cd11', 0.6 / self._headers[0].get('NAXIS1') )
-        # 1.2 is from the paper as the size of each field
-        # bp.set('Chunk.position.axis.function.cd11', 1.2 / self._headers[0].get('NAXIS1') )
         bp.add_attribute('Chunk.position.axis.function.cd11', 'CDELT1' )
         bp.set('Chunk.position.axis.function.cd12', 0.0)
         bp.set('Chunk.position.axis.function.cd21', 0.0)
-        # bp.set('Chunk.position.axis.function.cd22', 0.6 / self._headers[0].get('NAXIS2'))
-        # bp.set('Chunk.position.axis.function.cd22', 1.2 / self._headers[0].get('NAXIS2'))
         bp.add_attribute('Chunk.position.axis.function.cd22', 'CDELT2')
 
         bp.configure_energy_axis(3)
@@ -216,6 +232,12 @@ class JCMTSLSpatialSpectral(JCMTSLBase):
 
     def _get_date_obs(self, ext):
         return get_datetime_mjd(self._headers[ext].get('DATE-OBS'))
+
+    def _get_provenance_keywords(self, ext):
+        temp = set()
+        temp.add('matrix inversion')
+        temp.add(self._storage_name.catalogue_type())
+        return temp
 
     def _get_provenance_last_executed(self, ext):
         result = None
@@ -269,16 +291,3 @@ class JCMTSL450um(JCMTSLSpatialSpectral):
         bp.set('Chunk.energy.axis.range.end.val', 455.5)
         bp.set('Chunk.energy.bandpassName', '450um')
         self._logger.debug('Done accumulate_bp.')
-
-
-def mapping_factory(clients, config, reporter, observation, storage_name):
-    result = None
-    if storage_name.product_type() in [ProductType.AUXILIARY, ProductType.NOISE, ProductType.WEIGHT]:
-        result = JCMTSLBase(storage_name, clients, reporter, observation, config)
-    else:
-        if '850um' in storage_name.file_name:
-            result = JCMTSL850um(storage_name, clients, reporter, observation, config)
-        else:
-            result = JCMTSL450um(storage_name, clients, reporter, observation, config)
-    logging.error(f'Created {result.__class__.__name__} for {storage_name.file_uri}')
-    return result

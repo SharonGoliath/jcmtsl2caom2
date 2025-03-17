@@ -50,7 +50,7 @@ retry_file_name: retries.txt
 # this file is created in the logs directory, default is 'progress.txt'
 progress_file_name: progress.txt
 #
-collection: JCMTSL
+collection: SCUBA-LC
 scheme: cadc
 preview_scheme: cadc
 #
